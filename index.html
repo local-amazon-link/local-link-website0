@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Local Amazon Links - Generate Affiliate Links</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://cdn0.iconfinder.com/data/icons/most-usable-logos/120/Amazon-512.png">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,9 +16,11 @@
       background: linear-gradient(135deg, #f4f4f4 0%, #e0e0e0 100%);
     }
     .container {
-      max-width: 600px;
+      max-width: 90%; /* Allow the container to scale with screen size */
+      width: 100%;
       margin: 20px auto;
       padding: 20px;
+      box-sizing: border-box;
     }
     .header {
       text-align: center;
@@ -112,4 +116,230 @@
       color: #fff;
       border: none;
       border-radius: 5px;
-      font-weight
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .input-group button:hover {
+      background-color: #e0871d;
+    }
+    #result {
+      display: none;
+      text-align: center;
+    }
+    #result a {
+      color: #1a73e8;
+      text-decoration: none;
+      word-break: break-all;
+    }
+    #result a:hover {
+      text-decoration: underline;
+    }
+    .result-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+    }
+    .result-group button {
+      padding: 8px 15px;
+      background-color: #1a73e8;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .result-group button:hover {
+      background-color: #1557b0;
+    }
+    .cta {
+      text-align: center;
+    }
+    .cta a {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #f89820;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .cta a:hover {
+      background-color: #e0871d;
+    }
+    .footer {
+      text-align: center;
+      font-size: 14px;
+      color: #777;
+      margin-top: 30px;
+    }
+    /* Media Queries for Desktop */
+    @media (min-width: 768px) {
+      .container {
+        max-width: 800px; /* Wider container for desktop */
+      }
+      .header img {
+        max-width: 200px; /* Slightly larger logo */
+      }
+      .header h1 {
+        font-size: 28px; /* Larger title */
+      }
+      .intro p {
+        font-size: 18px; /* Larger intro text */
+      }
+      .card {
+        padding: 25px; /* More padding for cards */
+      }
+      .card h2 {
+        font-size: 20px; /* Larger card titles */
+      }
+      .step {
+        min-width: 180px; /* Wider steps */
+        max-width: 220px;
+        padding: 20px;
+      }
+      .step .number-circle {
+        width: 60px; /* Larger circles */
+        height: 60px;
+        line-height: 60px;
+        font-size: 24px;
+      }
+      .step p {
+        font-size: 15px; /* Larger step text */
+      }
+      .input-group input {
+        min-width: 350px; /* Wider input field */
+        padding: 12px;
+        font-size: 16px;
+      }
+      .input-group button {
+        padding: 12px 25px;
+        font-size: 16px;
+      }
+      .result-group button {
+        padding: 10px 20px;
+        font-size: 15px;
+      }
+      .cta a {
+        padding: 12px 25px;
+        font-size: 16px;
+      }
+      .footer {
+        font-size: 15px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .container {
+        max-width: 900px; /* Even wider for larger desktops */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <img src="https://cdn0.iconfinder.com/data/icons/most-usable-logos/120/Amazon-512.png" alt="Amazon Logo">
+      <h1>Local Amazon Links</h1>
+    </div>
+
+    <!-- Introduction -->
+    <div class="intro">
+      <p>Easily generate Amazon affiliate links with Local Amazon Links!</p>
+    </div>
+
+    <!-- How It Works Section -->
+    <div class="card">
+      <h2>How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="number-circle">1</div>
+          <p><strong>Copy the Amazon URL</strong></p>
+          <p>Find an Amazon product, click the address bar, and copy the link.</p>
+        </div>
+        <div class="step">
+          <div class="number-circle">2</div>
+          <p><strong>Paste and Generate</strong></p>
+          <p>Paste the URL below and click "Generate" to create your link.</p>
+        </div>
+        <div class="step">
+          <div class="number-circle">3</div>
+          <p><strong>Use Your Link</strong></p>
+          <p>Use the generated link to shop and earn affiliate benefits!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input Section -->
+    <div class="card">
+      <h2>Generate Your Affiliate Link</h2>
+      <div class="input-group">
+        <input type="text" id="amazonUrl" placeholder="Paste your Amazon URL here" />
+        <button onclick="generateLink()">Generate</button>
+      </div>
+    </div>
+
+    <!-- Result Section -->
+    <div class="card" id="result">
+      <h2>Your Affiliate Link</h2>
+      <div class="result-group">
+        <p><a id="affiliateLink" href="#" target="_blank"></a></p>
+        <button onclick="copyLink()">Copy Link</button>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="card cta">
+      <h2>Share with Friends</h2>
+      <p>Love this tool? Share it with your friends!</p>
+      <a href="mailto:?subject=Check%20out%20Local%20Amazon%20Links!&body=Hi,%0A%0AI%20found%20Local%20Amazon%20Links,%20a%20tool%20to%20generate%20Amazon%20affiliate%20links%20easily.%20Check%20it%20out:%20[Your%20Website%20URL]%0A%0A[Your%20Personal%20Message%20Here]" target="_blank">Share Now</a>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>Thank you for your support!<br> © 2025 Local Links</p>
+    </div>
+  </div>
+
+  <script>
+    function generateLink() {
+      const inputUrl = document.getElementById('amazonUrl').value.trim();
+      const affiliateTag = 'alittlesom047-20'; // Your affiliate ID
+      const amazonRegex = /https?:\/\/(www\.)?amazon\.com\/[^?\s"'<>)]+/;
+
+      // Validate the URL
+      if (!amazonRegex.test(inputUrl)) {
+        alert('Please enter a valid Amazon URL.');
+        return;
+      }
+
+      // Clean the URL and add the affiliate tag
+      const cleanLink = inputUrl.replace(/\/ref=.*|\/\?.*/, '');
+      const affiliateLink = cleanLink + '?tag=' + affiliateTag;
+
+      // Display the result
+      const resultDiv = document.getElementById('result');
+      const affiliateLinkElement = document.getElementById('affiliateLink');
+      affiliateLinkElement.href = affiliateLink;
+      affiliateLinkElement.textContent = affiliateLink;
+      resultDiv.style.display = 'block';
+
+      // Clear the input
+      document.getElementById('amazonUrl').value = '';
+    }
+
+    function copyLink() {
+      const affiliateLink = document.getElementById('affiliateLink').textContent;
+      navigator.clipboard.writeText(affiliateLink).then(() => {
+        alert('Link copied to clipboard!');
+      }).catch(err => {
+        alert('Failed to copy link: ' + err);
+      });
+    }
+  </script>
+</body>
+</html>
