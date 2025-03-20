@@ -11,7 +11,7 @@
       line-height: 1.6;
       margin: 0;
       padding: 0;
-      background: #f4f4f4;
+      background: linear-gradient(135deg, #f4f4f4 0%, #e0e0e0 100%);
     }
     .container {
       max-width: 600px;
@@ -30,6 +30,15 @@
       font-size: 24px;
       margin: 10px 0;
     }
+    .intro {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .intro p {
+      font-size: 16px;
+      color: #555;
+      margin: 0;
+    }
     .card {
       background: #f9f9f9;
       padding: 20px;
@@ -43,6 +52,37 @@
       text-align: center;
       font-size: 18px;
       margin: 0 0 15px 0;
+    }
+    .steps {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    .step {
+      flex: 1;
+      min-width: 150px;
+      max-width: 180px;
+      text-align: center;
+      padding: 15px;
+      background: #f9f9f9;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .step .icon {
+      font-size: 24px;
+      color: #f89820;
+      margin-bottom: 10px;
+    }
+    .step p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #555;
+    }
+    .step p strong {
+      color: #333;
     }
     .input-group {
       display: flex;
@@ -85,11 +125,47 @@
     #result a:hover {
       text-decoration: underline;
     }
+    .result-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+    }
+    .result-group button {
+      padding: 8px 15px;
+      background-color: #1a73e8;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .result-group button:hover {
+      background-color: #1557b0;
+    }
+    .cta {
+      text-align: center;
+    }
+    .cta a {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #f89820;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .cta a:hover {
+      background-color: #e0871d;
+    }
     .footer {
       text-align: center;
       font-size: 14px;
       color: #777;
-      margin-top: 20px;
+      margin-top: 30px;
     }
   </style>
 </head>
@@ -99,6 +175,33 @@
     <div class="header">
       <img src="https://cdn0.iconfinder.com/data/icons/most-usable-logos/120/Amazon-512.png" alt="Amazon Logo">
       <h1>Local Amazon Links</h1>
+    </div>
+
+    <!-- Introduction -->
+    <div class="intro">
+      <p>Easily generate Amazon affiliate links with Local Amazon Links!</p>
+    </div>
+
+    <!-- How It Works Section -->
+    <div class="card">
+      <h2>How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="icon">📋</div>
+          <p><strong>Copy the Amazon URL</strong></p>
+          <p>Find an Amazon product, click the address bar, and copy the link.</p>
+        </div>
+        <div class="step">
+          <div class="icon">🔗</div>
+          <p><strong>Paste and Generate</strong></p>
+          <p>Paste the URL below and click "Generate" to create your link.</p>
+        </div>
+        <div class="step">
+          <div class="icon">🛒</div>
+          <p><strong>Use Your Link</strong></p>
+          <p>Use the generated link to shop and earn affiliate benefits!</p>
+        </div>
+      </div>
     </div>
 
     <!-- Input Section -->
@@ -113,7 +216,17 @@
     <!-- Result Section -->
     <div class="card" id="result">
       <h2>Your Affiliate Link</h2>
-      <p><a id="affiliateLink" href="#" target="_blank"></a></p>
+      <div class="result-group">
+        <p><a id="affiliateLink" href="#" target="_blank"></a></p>
+        <button onclick="copyLink()">Copy Link</button>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="card cta">
+      <h2>Share with Friends</h2>
+      <p>Love this tool? Share it with your friends!</p>
+      <a href="mailto:?subject=Check%20out%20Local%20Amazon%20Links!&body=Hi,%0A%0AI%20found%20Local%20Amazon%20Links,%20a%20tool%20to%20generate%20Amazon%20affiliate%20links%20easily.%20Check%20it%20out:%20[Your%20Website%20URL]%0A%0A[Your%20Personal%20Message%20Here]" target="_blank">Share Now</a>
     </div>
 
     <!-- Footer -->
@@ -147,6 +260,15 @@
 
       // Clear the input
       document.getElementById('amazonUrl').value = '';
+    }
+
+    function copyLink() {
+      const affiliateLink = document.getElementById('affiliateLink').textContent;
+      navigator.clipboard.writeText(affiliateLink).then(() => {
+        alert('Link copied to clipboard!');
+      }).catch(err => {
+        alert('Failed to copy link: ' + err);
+      });
     }
   </script>
 </body>
